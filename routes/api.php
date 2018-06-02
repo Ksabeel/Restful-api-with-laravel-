@@ -13,6 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// buyers
+Route::resource('buyers', 'BuyersController')->only('index', 'show');
+
+// Categories
+Route::resource('categories', 'CategoriesController')->except('create', 'edit');
+
+// Products
+Route::resource('products', 'ProductsController')->only('index', 'show');
+
+// Sellers
+Route::resource('sellers', 'SellersController')->only('index', 'show');
+
+// Transactions
+Route::resource('transactions', 'TransactionsController')->only('index', 'show');
+
+// Users
+Route::resource('users', 'UsersController')->except('create', 'edit');
