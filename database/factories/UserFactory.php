@@ -42,3 +42,15 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'seller_id' => App\User::inRandomOrder()->first()->id,
     ];
 });
+
+$factory->define(App\Transaction::class, function (Faker $faker) {
+
+	$seller = App\Seller::has('product')->get()->random();
+	$buyer = App\User::all()->except($seller->id)->random();
+
+    return [
+        'quantity' => $faker->numberBetween(1, 3),
+        'buyer_id' => $buyer->id,
+        'product_id' => $seller->products->random()->id,
+    ];
+});
