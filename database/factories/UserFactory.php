@@ -24,3 +24,10 @@ $factory->define(App\User::class, function (Faker $faker) {
         'admin' => $faker->boolean,
     ];
 });
+
+$factory->define(App\Category::class, function (Faker $faker) {
+    return [
+        'name' => $faker->word,
+        'email' => $faker->paragraph(1),
+    ];
+});
