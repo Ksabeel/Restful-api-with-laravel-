@@ -26,7 +26,7 @@ class UsersController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -34,7 +34,7 @@ class UsersController extends ApiController
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $user = User::create([
+        $user->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -52,10 +52,8 @@ class UsersController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
-
         return $this->showOne($user);
     }
 
@@ -66,12 +64,10 @@ class UsersController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $request->validate([
-            'email' => "string|email|max:255|unique:users,email,$id",
+            'email' => "string|email|max:255|unique:users,email,$user->id",
             'password' => 'string|min:6|confirmed',
         ]);
 
@@ -97,9 +93,9 @@ class UsersController extends ApiController
             $user->admin = $request->admin;
         }
 
-        // if (! $user == null) {
-        //     return response()->json(['error' => 'You need to specify a different value to update', 'code' => 422], 422);
-        // }
+        if ($user === '') {
+            return $this->errorResponse('You need to specify a different value to update', 422);
+        }
 
         $user->save();
 
@@ -112,9 +108,8 @@ class UsersController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
 
         return $this->showOne($user);
