@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->boolean('status')->default(0);
             $table->string('image')->nullable();
             $table->unsignedInteger('seller_id');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('seller_id')->references('id')->on('users');
