@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Buyers;
 
-use App\Product;
+use App\Buyer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
 
-class ProductsController extends ApiController
+class BuyersController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class ProductsController extends ApiController
      */
     public function index()
     {
-        $products = Product::all();
+        $buyers = Buyer::has('transactions')->get();
 
-        return $this->showAll($products);
+        return $this->showAll($buyers);
     }
 
     /**
@@ -25,8 +26,8 @@ class ProductsController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Buyer $buyer)
     {
-        return $this->showOne($product);
+        return $this->showOne($buyer);
     }
 }

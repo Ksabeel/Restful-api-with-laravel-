@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sellers;
 
 use App\Seller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
 
 class SellersController extends ApiController
 {

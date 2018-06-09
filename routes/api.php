@@ -18,25 +18,25 @@ use Illuminate\Http\Request;
 // });
 
 // buyers
-Route::resource('buyers', 'BuyersController')->only('index', 'show');
-Route::resource('buyers.categories', 'BuyerCategoryController')->only('index');
-Route::resource('buyers.sellers', 'BuyerSellerController')->only('index');
-Route::resource('buyers.products', 'BuyerProductController')->only('index');
-Route::resource('buyers.transactions', 'BuyerTransactionController')->only('index');
+Route::resource('buyers', 'Buyers\BuyersController')->only('index', 'show');
+Route::resource('buyers.categories', 'Buyers\BuyerCategoryController')->only('index');
+Route::resource('buyers.sellers', 'Buyers\BuyerSellerController')->only('index');
+Route::resource('buyers.products', 'Buyers\BuyerProductController')->only('index');
+Route::resource('buyers.transactions', 'Buyers\BuyerTransactionController')->only('index');
 
 // Categories
-Route::resource('categories', 'CategoriesController')->except('create', 'edit');
+Route::resource('categories', 'Categories\CategoriesController')->except('create', 'edit');
 
 // Products
-Route::resource('products', 'ProductsController')->only('index', 'show');
+Route::resource('products', 'Products\ProductsController')->only('index', 'show');
 
 // Sellers
-Route::resource('sellers', 'SellersController')->only('index', 'show');
+Route::resource('sellers', 'Sellers\SellersController')->only('index', 'show');
 
 // Transactions
-Route::resource('transactions', 'TransactionsController')->only('index', 'show');
-Route::resource('transactions.categories', 'TransactionCategoryController')->only('index');
-Route::resource('transactions.sellers', 'TransactionSellerController')->only('index');
+Route::resource('transactions', 'Transactions\TransactionsController')->only('index', 'show');
+Route::resource('transactions.categories', 'Transactions\TransactionCategoryController')->only('index');
+Route::resource('transactions.sellers', 'Transactions\TransactionSellerController')->only('index');
 
 // Users
-Route::resource('users', 'UsersController')->except('create', 'edit');
+Route::resource('users', 'Users\UsersController')->except('create', 'edit');
