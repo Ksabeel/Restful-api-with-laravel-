@@ -94,7 +94,7 @@ class UsersController extends ApiController
             $user->admin = $request->admin;
         }
 
-        if ($user === '') {
+        if (! $user->isDirty()) {
             return $this->errorResponse('You need to specify a different value to update', 422);
         }
 
