@@ -20,6 +20,8 @@ class Product extends Model
     ];
 
     protected $dates = ['deleted_at'];
+    
+    protected $hidden = ['pivot'];
 
     public function isAvailable()
     {
