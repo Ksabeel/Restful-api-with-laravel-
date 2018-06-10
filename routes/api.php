@@ -33,6 +33,10 @@ Route::resource('categories.buyers', 'Categories\CategoryBuyerController')->only
 
 // Products
 Route::resource('products', 'Products\ProductsController')->only('index', 'show');
+Route::resource('products.transactions', 'Products\ProductTransactionController')->only('index');
+Route::resource('products.buyers', 'Products\ProductBuyerController')->only('index');
+Route::resource('products.categories', 'Products\ProductCategoryController')->except('create', 'edit');
+Route::resource('products.buyers.transactions', 'Products\ProductBuyerTransactionController')->only('store');
 
 // Sellers
 Route::resource('sellers', 'Sellers\SellersController')->only('index', 'show');
