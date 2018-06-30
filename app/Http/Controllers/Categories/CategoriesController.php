@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Categories;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Transformers\CategoryTransformer;
 
 class CategoriesController extends ApiController
 {
+    public function __construct()
+    {        
+        $this->middleware('transform.input:' . CategoryTransformer::class)->only(['store', 'update']);
+    }
+    
     /**
      * Display a listing of the resource.
      *
